@@ -4,39 +4,15 @@
 <title ><?=$title?></title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<style type="text/css">
-img.back {
+<link rel="stylesheet" href="http://www.orzwow.com/css/my.css">
 
-		position:fixed;
-		left:20%;
-		top:0%;
-
-		}
-
-
-ol.one
-{
-position:fixed;
-left:30%;
-top:30%;
-}
-
-
-
-</style>
 
 </head>
 <body>
-
-<h1 class ="back"><?=$heading?></h1>
-
-<img class ="back" src="http://opcdn.battle.net/static/heroes/429/images/media/wallpaper/heroes001/facebook.jpg" />
-
-<div class="one">
-<ol class="one" >
+<h1><?=$heading?></h1>
+<div align=center>
 <?php
-		
-		if ($this->session->userdata('is_login'))
+if ($this->session->userdata('is_login'))
 			{	
 				echo $this->session->userdata('username').anchor('account/logout','退出|');
 				echo anchor ("vote/addmovie",'添加新片').'</p>';
@@ -44,16 +20,22 @@ top:30%;
 						echo anchor ("account", "登录");
 						echo "|";		
 						echo anchor ("account/reg", "注册");						
-						}		
+						}	
+?>						
+</div>
+<ol class = one>
+<?php
+		
+		
 		
 		echo "</br>";
 		echo '<table border="1">';
-		echo "<tr><th>ID</th><th>电影电视名</th><th>得分</th><th>票数</th>";
+		echo "<tr><th>电影电视名</th><th>得分</th><th>票数</th>";
 		echo "<th>赞？渣？</th> <th>评论数</th>";
 		echo "</tr>";
 		foreach($query->result() as $row)
         {        
-			echo "<tr><td>$row->ID </td><td><ins>".anchor("vote/mcomment/$row->ID",$row->Name)."</ins></td><td> $row->Results</td><td> $row->vcount</td>";
+			echo "<tr><td><ins>".anchor("vote/mcomment/$row->ID",$row->Name)."</ins></td><td> $row->Results</td><td> $row->vcount</td>";
 			$c = $row->comments;
 			/*
 			echo "<tr><td>$row->ID </td><td>";
@@ -106,6 +88,27 @@ top:30%;
 
 
 </ol>
-</div>
+
+<ol class = two>
+<?php
+		
+		echo "</br>";
+		echo '<table border="1" >';
+		echo '<tr><th>评论</th><th class="one">作者</th>';
+		echo "</tr>";
+		foreach($query1->result() as $row)
+        {        
+			echo "<tr><td><ins>".anchor("vote/mcomment/$row->movie_id",$row->comments)."</ins></td><td> $row->author</td>";
+	
+		}
+		
+		echo "</tr>";
+		echo "</table>";
+	
+ ?>
+
+
+</ol>
+
 </body>
 </html>
