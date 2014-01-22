@@ -12,6 +12,7 @@ class Vote extends CI_Controller{
   $this->load->library('email');
   $this->load->helper('url');
   $this->load->model('movies_model');
+  $this->load->library('table');
  }
 
  public function index()
@@ -21,7 +22,47 @@ class Vote extends CI_Controller{
 	$this->db->where('status',1);
 	$this->db->order_by("ID", "desc"); 
 	$data['query'] = $this->db->get('movie');
-
+	$this->db->order_by("ID", "desc"); 
+	$data['query1'] = $this->db->get('movie_comments');
+	
+	$this->load->view('vote_view',$data);
+ }
+ 
+ public function index9()
+ {
+	$data['title']= "粉黑大作战";
+	$data['heading'] = "对决啦！不是神作就是渣！";
+	$this->db->where('status',1);
+	$order = $this->input->post('order');
+	$this->db->order_by($order, "desc"); 
+	$data['query'] = $this->db->get('movie');
+	$this->db->order_by("ID", "desc"); 
+	$data['query1'] = $this->db->get('movie_comments');
+	
+	$this->load->view('vote_view',$data);
+ }
+ 
+  public function index1()
+ {
+	$data['title']= "粉黑大作战";
+	$data['heading'] = "对决啦！不是神作就是渣！";
+	$this->db->where('status',1);
+	$this->db->order_by("Results", "desc"); 
+	$data['query'] = $this->db->get('movie');
+	$this->db->order_by("ID", "desc"); 
+	$data['query1'] = $this->db->get('movie_comments');
+	
+	$this->load->view('vote_view',$data);
+ }
+ 
+   public function index2()
+ {
+	$data['title']= "粉黑大作战";
+	$data['heading'] = "对决啦！不是神作就是渣！";
+	$this->db->where('status',1);
+	$this->db->order_by("vcount", "desc"); 
+	$data['query'] = $this->db->get('movie');
+	$this->db->order_by("ID", "desc"); 
 	$data['query1'] = $this->db->get('movie_comments');
 	
 	$this->load->view('vote_view',$data);

@@ -29,21 +29,28 @@ if ($this->session->userdata('is_login'))
 		
 		
 		echo "</br>";
+		/*
+		$options = array(
+					'Results'=>'按得分排序',
+					'vcount'=>'按票数排序',
+					'ID'=> '按先后排序',
+					
+					);
+		echo form_open('vote/index9/');
+		echo form_dropdown('order', $options, 'ID');
+		echo '<input type="submit" value="排序！">';
+		echo '</form>';
+		*/
+		
 		echo '<table border="1">';
-		echo "<tr><th>电影电视名</th><th>得分</th><th>票数</th>";
+		echo "<tr><th>作品</th><th><ins>".anchor("vote/index1/",'得分')."</ins></th><th><ins>".anchor("vote/index2/",'票数')."</ins></th>";
 		echo "<th>赞？渣？</th> <th>评论数</th>";
 		echo "</tr>";
 		foreach($query->result() as $row)
         {        
 			echo "<tr><td><ins>".anchor("vote/mcomment/$row->ID",$row->Name)."</ins></td><td> $row->Results</td><td> $row->vcount</td>";
 			$c = $row->comments;
-			/*
-			echo "<tr><td>$row->ID </td><td>";
-			echo form_open('vote/mcomment');
-			echo form_submit('movieName' ,$row->Name);
-			echo form_close();
-					echo "</td><td> $row->Results</td><td> $row->vcount</td>";
-			*/
+			
 	
 
 			
@@ -83,7 +90,7 @@ if ($this->session->userdata('is_login'))
 		
 		echo "</tr>";
 		echo "</table>";
-	
+
  ?>
 
 
